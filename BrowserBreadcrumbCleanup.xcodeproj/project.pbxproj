@@ -1,0 +1,344 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3BCF11621BE2AD8900B6A566 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BCF11611BE2AD8900B6A566 /* Foundation.framework */; };
+		3BCF116D1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCF116C1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3BCF115E1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = BrowserBreadcrumbCleanup.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BCF11611BE2AD8900B6A566 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3BCF11661BE2AD8900B6A566 /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
+		3BCF11671BE2AD8900B6A566 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		3BCF11691BE2AD8900B6A566 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		3BCF116A1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BrowserBreadcrumbCleanup-Prefix.pch"; sourceTree = "<group>"; };
+		3BCF116B1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = BrowserBreadcrumbCleanup.xm; sourceTree = "<group>"; };
+		3BCF116C1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BrowserBreadcrumbCleanup.mm; sourceTree = "<group>"; };
+		3BCF11711BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = BrowserBreadcrumbCleanup.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/BrowserBreadcrumbCleanup.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3BCF115A1BE2AD8900B6A566 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BCF11621BE2AD8900B6A566 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3BCF11531BE2AD8900B6A566 = {
+			isa = PBXGroup;
+			children = (
+				3BCF11631BE2AD8900B6A566 /* BrowserBreadcrumbCleanup */,
+				3BCF11601BE2AD8900B6A566 /* Frameworks */,
+				3BCF115F1BE2AD8900B6A566 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3BCF115F1BE2AD8900B6A566 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF115E1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3BCF11601BE2AD8900B6A566 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF11611BE2AD8900B6A566 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3BCF11631BE2AD8900B6A566 /* BrowserBreadcrumbCleanup */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF116B1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.xm */,
+				3BCF116C1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.mm */,
+				3BCF11641BE2AD8900B6A566 /* Package */,
+				3BCF11681BE2AD8900B6A566 /* Supporting Files */,
+			);
+			path = BrowserBreadcrumbCleanup;
+			sourceTree = "<group>";
+		};
+		3BCF11641BE2AD8900B6A566 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF11651BE2AD8900B6A566 /* DEBIAN */,
+				3BCF116E1BE2AD8900B6A566 /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		3BCF11651BE2AD8900B6A566 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF11661BE2AD8900B6A566 /* control.txt */,
+				3BCF11671BE2AD8900B6A566 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		3BCF11681BE2AD8900B6A566 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF11691BE2AD8900B6A566 /* PackageVersion.plist */,
+				3BCF116A1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3BCF116E1BE2AD8900B6A566 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF116F1BE2AD8900B6A566 /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		3BCF116F1BE2AD8900B6A566 /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF11701BE2AD8900B6A566 /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		3BCF11701BE2AD8900B6A566 /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				3BCF11711BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3BCF115B1BE2AD8900B6A566 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3BCF115D1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BCF11741BE2AD8900B6A566 /* Build configuration list for PBXNativeTarget "BrowserBreadcrumbCleanup" */;
+			buildPhases = (
+				3BCF11581BE2AD8900B6A566 /* ShellScript */,
+				3BCF11591BE2AD8900B6A566 /* Sources */,
+				3BCF115A1BE2AD8900B6A566 /* Frameworks */,
+				3BCF115B1BE2AD8900B6A566 /* Headers */,
+				3BCF115C1BE2AD8900B6A566 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BrowserBreadcrumbCleanup;
+			productName = BrowserBreadcrumbCleanup;
+			productReference = 3BCF115E1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3BCF11541BE2AD8900B6A566 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				TargetAttributes = {
+					3BCF115D1BE2AD8900B6A566 = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = 3BCF11571BE2AD8900B6A566 /* Build configuration list for PBXProject "BrowserBreadcrumbCleanup" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3BCF11531BE2AD8900B6A566;
+			productRefGroup = 3BCF115F1BE2AD8900B6A566 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3BCF115D1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3BCF11581BE2AD8900B6A566 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp-logos";
+		};
+		3BCF115C1BE2AD8900B6A566 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3BCF11591BE2AD8900B6A566 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BCF116D1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3BCF11721BE2AD8900B6A566 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Debug;
+		};
+		3BCF11731BE2AD8900B6A566 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Release;
+		};
+		3BCF11751BE2AD8900B6A566 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		3BCF11761BE2AD8900B6A566 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3BCF11571BE2AD8900B6A566 /* Build configuration list for PBXProject "BrowserBreadcrumbCleanup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BCF11721BE2AD8900B6A566 /* Debug */,
+				3BCF11731BE2AD8900B6A566 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3BCF11741BE2AD8900B6A566 /* Build configuration list for PBXNativeTarget "BrowserBreadcrumbCleanup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BCF11751BE2AD8900B6A566 /* Debug */,
+				3BCF11761BE2AD8900B6A566 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3BCF11541BE2AD8900B6A566 /* Project object */;
+}
