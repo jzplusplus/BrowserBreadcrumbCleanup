@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3BCF11621BE2AD8900B6A566 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BCF11611BE2AD8900B6A566 /* Foundation.framework */; };
 		3BCF116D1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3BCF116C1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.mm */; };
+		3BCF11781BE2ADCE00B6A566 /* libsubstrate.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BCF11771BE2ADCE00B6A566 /* libsubstrate.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,9 +19,10 @@
 		3BCF11671BE2AD8900B6A566 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
 		3BCF11691BE2AD8900B6A566 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
 		3BCF116A1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BrowserBreadcrumbCleanup-Prefix.pch"; sourceTree = "<group>"; };
-		3BCF116B1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = BrowserBreadcrumbCleanup.xm; sourceTree = "<group>"; };
+		3BCF116B1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = BrowserBreadcrumbCleanup.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3BCF116C1BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BrowserBreadcrumbCleanup.mm; sourceTree = "<group>"; };
 		3BCF11711BE2AD8900B6A566 /* BrowserBreadcrumbCleanup.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = BrowserBreadcrumbCleanup.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/BrowserBreadcrumbCleanup.plist; sourceTree = "<group>"; };
+		3BCF11771BE2ADCE00B6A566 /* libsubstrate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsubstrate.dylib; path = ../../../../../opt/iOSOpenDev/lib/libsubstrate.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BCF11781BE2ADCE00B6A566 /* libsubstrate.dylib in Frameworks */,
 				3BCF11621BE2AD8900B6A566 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,6 +58,7 @@
 		3BCF11601BE2AD8900B6A566 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3BCF11771BE2ADCE00B6A566 /* libsubstrate.dylib */,
 				3BCF11611BE2AD8900B6A566 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -287,6 +291,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup-Prefix.pch";
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/iOSOpenDev/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
@@ -307,6 +315,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup-Prefix.pch";
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/iOSOpenDev/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
