@@ -2,29 +2,72 @@
 // Logos by Dustin Howett
 // See http://iphonedevwiki.net/index.php/Logos
 
+#import <UIKit/UIKit.h>;
+
 id mController;
+id openedTab;
+BOOL shouldCloseTab = YES;
 
 %hook MainController
--(id)init {
-    mController = %orig;
-    return mController;
+-(void)applicationDidBecomeActive:(id)app
+{
+    %orig(app);
+    mController = self;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        openedTab = [[self mainTabModel] currentTab];
+    });
+}
+%end
+
+%hook Application
+-(void)applicationOpenURL:(id)url
+{
+    %orig(url);
+    
+    openedTab = [[[%c(BrowserController) sharedBrowserController] tabController] activeTabDocument];
 }
 %end
 
 %hook UIStatusBarBreadcrumbItemView
 
-- (void)userDidActivateButton:(id)originalArgument
-{
-    if( [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.google.chrome.ios"])
-    {
-        [[[mController mainTabModel] currentTab] close];
-    }
-    else if([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.mobilesafari"])
-    {
-        [[[[%c(BrowserController) sharedBrowserController] tabController] activeTabDocument] _closeTabDocumentAnimated: true];
-    }
+- (void)setDestinationText:(id)arg {
+    %orig(arg);
+    
+    UILongPressGestureRecognizer *btn_LongPress_gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleBtnLongPressgesture:)];
+    [[self button] addGestureRecognizer:btn_LongPress_gesture];
+}
 
-	%orig(originalArgument);
+- (void)userDidActivateButton:(id)arg
+{
+    if(shouldCloseTab)
+    {
+        if( [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.google.chrome.ios"])
+        {
+            if( [[mController mainTabModel] currentTab] == openedTab )
+            {
+                [openedTab close];
+            }
+        }
+        else if([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.mobilesafari"])
+        {
+            if( [[[%c(BrowserController) sharedBrowserController] tabController] activeTabDocument] == openedTab )
+            {
+                [openedTab _closeTabDocumentAnimated: true];
+            }
+        }
+    }
+    
+    %orig(arg);
+}
+
+%new
+- (void)handleBtnLongPressgesture:(UILongPressGestureRecognizer *)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        shouldCloseTab = NO;
+    }
 }
 
 %end
