@@ -16,6 +16,7 @@ BOOL shouldCloseTab = YES;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         openedTab = [[self mainTabModel] currentTab];
+        shouldCloseTab = YES;
     });
 }
 %end
@@ -26,6 +27,7 @@ BOOL shouldCloseTab = YES;
     %orig(url);
     
     openedTab = [[[%c(BrowserController) sharedBrowserController] tabController] activeTabDocument];
+    shouldCloseTab = YES;
 }
 %end
 
@@ -36,6 +38,7 @@ BOOL shouldCloseTab = YES;
     
     UILongPressGestureRecognizer *btn_LongPress_gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleBtnLongPressgesture:)];
     [[self button] addGestureRecognizer:btn_LongPress_gesture];
+    shouldCloseTab = YES;
 }
 
 - (void)userDidActivateButton:(id)arg
@@ -67,6 +70,11 @@ BOOL shouldCloseTab = YES;
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         shouldCloseTab = NO;
+    }
+    
+    else if(recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        [[self button] sendActionsForControlEvents:UIControlEventTouchUpInside];
     }
 }
 
