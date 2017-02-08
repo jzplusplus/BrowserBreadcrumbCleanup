@@ -5,24 +5,23 @@
 
 #import <UIKit/UIKit.h>;
 
-id mController;
 id openedTab;
 BOOL shouldCloseTab = YES;
 
 #include <logos/logos.h>
 #include <substrate.h>
-@class BrowserController; @class MainController; @class UIStatusBarBreadcrumbItemView; @class Application; 
-static void (*_logos_orig$_ungrouped$MainController$applicationDidBecomeActive$)(MainController*, SEL, id); static void _logos_method$_ungrouped$MainController$applicationDidBecomeActive$(MainController*, SEL, id); static void (*_logos_orig$_ungrouped$Application$applicationOpenURL$)(Application*, SEL, id); static void _logos_method$_ungrouped$Application$applicationOpenURL$(Application*, SEL, id); static void (*_logos_orig$_ungrouped$UIStatusBarBreadcrumbItemView$setDestinationText$)(UIStatusBarBreadcrumbItemView*, SEL, id); static void _logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$setDestinationText$(UIStatusBarBreadcrumbItemView*, SEL, id); static void (*_logos_orig$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActivateButton$)(UIStatusBarBreadcrumbItemView*, SEL, id); static void _logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActivateButton$(UIStatusBarBreadcrumbItemView*, SEL, id); static void _logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$handleBtnLongPressgesture$(UIStatusBarBreadcrumbItemView*, SEL, UILongPressGestureRecognizer *); 
-static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$BrowserController(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("BrowserController"); } return _klass; }
-#line 11 "/Users/jzplusplus/Documents/jailbreak/BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup.xm"
+@class BrowserController; @class UIStatusBarBreadcrumbItemView; @class Application; @class MainApplicationDelegate; 
+static void (*_logos_orig$_ungrouped$MainApplicationDelegate$applicationDidBecomeActive$)(MainApplicationDelegate*, SEL, id); static void _logos_method$_ungrouped$MainApplicationDelegate$applicationDidBecomeActive$(MainApplicationDelegate*, SEL, id); static void (*_logos_orig$_ungrouped$Application$applicationOpenURL$)(Application*, SEL, id); static void _logos_method$_ungrouped$Application$applicationOpenURL$(Application*, SEL, id); static void (*_logos_orig$_ungrouped$UIStatusBarBreadcrumbItemView$setDestinationText$)(UIStatusBarBreadcrumbItemView*, SEL, id); static void _logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$setDestinationText$(UIStatusBarBreadcrumbItemView*, SEL, id); static void (*_logos_orig$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActivateButton$)(UIStatusBarBreadcrumbItemView*, SEL, id); static void _logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActivateButton$(UIStatusBarBreadcrumbItemView*, SEL, id); static void _logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$handleBtnLongPressgesture$(UIStatusBarBreadcrumbItemView*, SEL, UILongPressGestureRecognizer *); 
+static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$Application(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("Application"); } return _klass; }static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$MainApplicationDelegate(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("MainApplicationDelegate"); } return _klass; }static __inline__ __attribute__((always_inline)) Class _logos_static_class_lookup$BrowserController(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("BrowserController"); } return _klass; }
+#line 10 "/Users/jzplusplus/Documents/jailbreak/BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup.xm"
 
 
-static void _logos_method$_ungrouped$MainController$applicationDidBecomeActive$(MainController* self, SEL _cmd, id app) {
-    _logos_orig$_ungrouped$MainController$applicationDidBecomeActive$(self, _cmd, app);
-    mController = self;
+static void _logos_method$_ungrouped$MainApplicationDelegate$applicationDidBecomeActive$(MainApplicationDelegate* self, SEL _cmd, id app) {
+    _logos_orig$_ungrouped$MainApplicationDelegate$applicationDidBecomeActive$(self, _cmd, app);
+    
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        openedTab = [[self mainTabModel] currentTab];
+        openedTab = [[[_logos_static_class_lookup$MainApplicationDelegate() sharedMainController] mainTabModel] currentTab];
         shouldCloseTab = YES;
     });
 }
@@ -33,7 +32,16 @@ static void _logos_method$_ungrouped$MainController$applicationDidBecomeActive$(
 static void _logos_method$_ungrouped$Application$applicationOpenURL$(Application* self, SEL _cmd, id url) {
     _logos_orig$_ungrouped$Application$applicationOpenURL$(self, _cmd, url);
     
-    openedTab = [[[_logos_static_class_lookup$BrowserController() sharedBrowserController] tabController] activeTabDocument];
+    
+    if([self respondsToSelector:@selector(browserControllers)])
+    {
+        openedTab = [[[self browserControllers][0] tabController] activeTabDocument];
+    }
+    else
+    {
+        openedTab = [[[_logos_static_class_lookup$BrowserController() sharedBrowserController] tabController] activeTabDocument];
+    }
+        
     shouldCloseTab = YES;
 }
 
@@ -54,14 +62,26 @@ static void _logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActiva
     {
         if( [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.google.chrome.ios"])
         {
-            if( [[mController mainTabModel] currentTab] == openedTab )
+            
+            if( [[[_logos_static_class_lookup$MainApplicationDelegate() sharedMainController] mainTabModel] currentTab] == openedTab )
             {
                 [openedTab close];
             }
         }
         else if([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.mobilesafari"])
         {
-            if( [[[_logos_static_class_lookup$BrowserController() sharedBrowserController] tabController] activeTabDocument] == openedTab )
+            
+            id currentTab;
+            if([[_logos_static_class_lookup$Application() sharedApplication] respondsToSelector:@selector(browserControllers)])
+            {
+                currentTab = [[[[_logos_static_class_lookup$Application() sharedApplication] browserControllers][0] tabController] activeTabDocument];
+            }
+            else
+            {
+                currentTab = [[[_logos_static_class_lookup$BrowserController() sharedBrowserController] tabController] activeTabDocument];
+            }
+            
+            if( currentTab == openedTab )
             {
                 [openedTab _closeTabDocumentAnimated: true];
             }
@@ -87,5 +107,5 @@ static void _logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$handleBtnLong
 
 
 static __attribute__((constructor)) void _logosLocalInit() {
-{Class _logos_class$_ungrouped$MainController = objc_getClass("MainController"); MSHookMessageEx(_logos_class$_ungrouped$MainController, @selector(applicationDidBecomeActive:), (IMP)&_logos_method$_ungrouped$MainController$applicationDidBecomeActive$, (IMP*)&_logos_orig$_ungrouped$MainController$applicationDidBecomeActive$);Class _logos_class$_ungrouped$Application = objc_getClass("Application"); MSHookMessageEx(_logos_class$_ungrouped$Application, @selector(applicationOpenURL:), (IMP)&_logos_method$_ungrouped$Application$applicationOpenURL$, (IMP*)&_logos_orig$_ungrouped$Application$applicationOpenURL$);Class _logos_class$_ungrouped$UIStatusBarBreadcrumbItemView = objc_getClass("UIStatusBarBreadcrumbItemView"); MSHookMessageEx(_logos_class$_ungrouped$UIStatusBarBreadcrumbItemView, @selector(setDestinationText:), (IMP)&_logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$setDestinationText$, (IMP*)&_logos_orig$_ungrouped$UIStatusBarBreadcrumbItemView$setDestinationText$);MSHookMessageEx(_logos_class$_ungrouped$UIStatusBarBreadcrumbItemView, @selector(userDidActivateButton:), (IMP)&_logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActivateButton$, (IMP*)&_logos_orig$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActivateButton$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(UILongPressGestureRecognizer *), strlen(@encode(UILongPressGestureRecognizer *))); i += strlen(@encode(UILongPressGestureRecognizer *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$UIStatusBarBreadcrumbItemView, @selector(handleBtnLongPressgesture:), (IMP)&_logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$handleBtnLongPressgesture$, _typeEncoding); }} }
-#line 82 "/Users/jzplusplus/Documents/jailbreak/BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup.xm"
+{Class _logos_class$_ungrouped$MainApplicationDelegate = objc_getClass("MainApplicationDelegate"); MSHookMessageEx(_logos_class$_ungrouped$MainApplicationDelegate, @selector(applicationDidBecomeActive:), (IMP)&_logos_method$_ungrouped$MainApplicationDelegate$applicationDidBecomeActive$, (IMP*)&_logos_orig$_ungrouped$MainApplicationDelegate$applicationDidBecomeActive$);Class _logos_class$_ungrouped$Application = objc_getClass("Application"); MSHookMessageEx(_logos_class$_ungrouped$Application, @selector(applicationOpenURL:), (IMP)&_logos_method$_ungrouped$Application$applicationOpenURL$, (IMP*)&_logos_orig$_ungrouped$Application$applicationOpenURL$);Class _logos_class$_ungrouped$UIStatusBarBreadcrumbItemView = objc_getClass("UIStatusBarBreadcrumbItemView"); MSHookMessageEx(_logos_class$_ungrouped$UIStatusBarBreadcrumbItemView, @selector(setDestinationText:), (IMP)&_logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$setDestinationText$, (IMP*)&_logos_orig$_ungrouped$UIStatusBarBreadcrumbItemView$setDestinationText$);MSHookMessageEx(_logos_class$_ungrouped$UIStatusBarBreadcrumbItemView, @selector(userDidActivateButton:), (IMP)&_logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActivateButton$, (IMP*)&_logos_orig$_ungrouped$UIStatusBarBreadcrumbItemView$userDidActivateButton$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(UILongPressGestureRecognizer *), strlen(@encode(UILongPressGestureRecognizer *))); i += strlen(@encode(UILongPressGestureRecognizer *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$UIStatusBarBreadcrumbItemView, @selector(handleBtnLongPressgesture:), (IMP)&_logos_method$_ungrouped$UIStatusBarBreadcrumbItemView$handleBtnLongPressgesture$, _typeEncoding); }} }
+#line 102 "/Users/jzplusplus/Documents/jailbreak/BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup/BrowserBreadcrumbCleanup.xm"

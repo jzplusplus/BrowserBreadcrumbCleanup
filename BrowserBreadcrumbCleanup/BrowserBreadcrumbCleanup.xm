@@ -4,18 +4,17 @@
 
 #import <UIKit/UIKit.h>;
 
-id mController;
 id openedTab;
 BOOL shouldCloseTab = YES;
 
-%hook MainController
+%hook MainApplicationDelegate
 -(void)applicationDidBecomeActive:(id)app
 {
     %orig(app);
-    mController = self;
     
+    //NSLog(@"**********CHROME url open");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        openedTab = [[self mainTabModel] currentTab];
+        openedTab = [[[%c(MainApplicationDelegate) sharedMainController] mainTabModel] currentTab];
         shouldCloseTab = YES;
     });
 }
@@ -26,7 +25,16 @@ BOOL shouldCloseTab = YES;
 {
     %orig(url);
     
-    openedTab = [[[%c(BrowserController) sharedBrowserController] tabController] activeTabDocument];
+    //NSLog(@"**********SAFARI url open");
+    if([self respondsToSelector:@selector(browserControllers)])
+    {
+        openedTab = [[[self browserControllers][0] tabController] activeTabDocument];
+    }
+    else
+    {
+        openedTab = [[[%c(BrowserController) sharedBrowserController] tabController] activeTabDocument];
+    }
+        
     shouldCloseTab = YES;
 }
 %end
@@ -47,14 +55,26 @@ BOOL shouldCloseTab = YES;
     {
         if( [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.google.chrome.ios"])
         {
-            if( [[mController mainTabModel] currentTab] == openedTab )
+            //NSLog(@"**********CHROME");
+            if( [[[%c(MainApplicationDelegate) sharedMainController] mainTabModel] currentTab] == openedTab )
             {
                 [openedTab close];
             }
         }
         else if([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.mobilesafari"])
         {
-            if( [[[%c(BrowserController) sharedBrowserController] tabController] activeTabDocument] == openedTab )
+            //NSLog(@"**********SAFARI");
+            id currentTab;
+            if([[%c(Application) sharedApplication] respondsToSelector:@selector(browserControllers)])
+            {
+                currentTab = [[[[%c(Application) sharedApplication] browserControllers][0] tabController] activeTabDocument];
+            }
+            else
+            {
+                currentTab = [[[%c(BrowserController) sharedBrowserController] tabController] activeTabDocument];
+            }
+            
+            if( currentTab == openedTab )
             {
                 [openedTab _closeTabDocumentAnimated: true];
             }

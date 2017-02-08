@@ -1,6 +1,6 @@
 Package: jzplusplus.BrowserBreadcrumbCleanup
 Name: BrowserBreadcrumbCleanup
-Version: 1.1-2
+Version: 2.0-1
 Description: 
 Section: System
 Depends: firmware (>= 9.0), mobilesubstrate
